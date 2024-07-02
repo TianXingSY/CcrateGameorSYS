@@ -54,7 +54,7 @@ int WriteListToFile(LinkList L, const char* filename) {
     Node* current = L->next; // 跳过头节点
     while (current != NULL) {
         // 写入学生信息
-        fprintf(fp, "%s,%d,%.2f\n", current->data.name, current->data.stunum, current->data.score);
+        fprintf(fp, "%s,%d,%.1f\n", current->data.name, current->data.stunum, current->data.score);
         current = current->next; // 移动到下一个节点
     }
 
@@ -88,7 +88,102 @@ int main() {
         }
         printf("创建新文件成功\n");
     }
-    //CreateFromTailWithoutInput(head);
+    int flag = 1;
+    printf("欢迎使用学生成绩管理系统-ver beta 0.1\n");
+    while (flag) {
+        int choice;
+        printf("请选择操作：\n");
+        printf("1. 添加学生\n");
+        printf("2. 删除学生\n");
+        printf("3. 修改学生信息（成绩）\n");
+        printf("4. 查询学生成绩\n");
+        printf("5. 显示所有学生成绩\n");
+        printf("6. 退出\n");
+        scanf("%d", &choice);
+
+        switch (choice) {
+
+            case 1: {
+                stu newStu;
+                printf("请输入学生姓名、学号和成绩(以空格space分割)：\n");
+                scanf("%s %d %f", newStu.name, &newStu.stunum, &newStu.score);
+                InsertLL(head, linkLen(head)+1, newStu);
+                printf("学生信息已添加\n");
+                if (WriteListToFile(head, "students.txt")) {
+                    printf("\n");
+                }
+                break;
+            }
+            case 2: {
+                int stunum, loca;
+                printf("请输入要删除的学生学号：\n");
+                scanf("%d", &stunum);
+                stu deletedStu;
+                loca = Findstunum(head, stunum);
+                if (DelLL(head, loca, &deletedStu)) {
+                    printf("学生信息已删除\n");
+                }
+                else {
+                    printf("未找到该学生\n");
+                }
+                if (WriteListToFile(head, "students.txt")) {
+                    printf("\n");
+                }
+                break;
+            }
+            case 3: {
+                int stunum, loca;
+                printf("请输入要修改的学生的学号：\n");
+                scanf("%d", &stunum);
+                stu modifiedStu;
+                loca = Findstunum(head, stunum);
+                if (DelLL(head, loca, &modifiedStu)) {
+                    printf("请输入新成绩\n");
+                    scanf("%f", &modifiedStu.score);
+                    if (InsertLL(head, loca, modifiedStu)) {
+                        printf("成绩修改成功\n");
+                        if (WriteListToFile(head, "students.txt")) {
+                            printf("\n");
+                        }
+                    }
+                    else {
+                        printf("成绩修改失败\n");
+                    }
+                }
+                else {
+                    printf("未找到该学生\n");
+                }
+                
+                break;
+            }
+            case 4: {
+                int stunum;
+                printf("请输入要查询的学生学号：\n");
+                scanf("%d", &stunum);
+                stu searchedStu;
+                if (Findstunum(head, stunum) != -1) {
+                    printf("学生信息如下：\n");
+                    printf("%s %d %f\n", searchedStu.name, searchedStu.stunum, searchedStu.score);
+                }
+                else {
+                    printf("未找到该学生\n");
+                }
+                break;
+            }
+            case 5: {
+                printf("所有学生成绩如下：\n");
+                bianli(head);
+                break;
+            }
+            case 6: {
+                printf("感谢使用学生成绩管理系统-ver beta 0.1\n");
+                flag = 0;
+                break;
+            }
+        }
+
+    }
+    /*CreateFromTailWithoutInput(head);
     printf("%s %d %f",head->next->data.name,head->next->data.stunum,head->next->data.score);
     printf("\n");
     bianli(head);
@@ -102,7 +197,7 @@ int main() {
     bianli(head);
     see.score+=5;
     InsertLL(head, 3, see);
-    bianli(head);
+    bianli(head);*/
 
     if (WriteListToFile(head, "students.txt")) {
         printf("链表数据已写入文件\n");

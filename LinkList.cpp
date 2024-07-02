@@ -138,11 +138,11 @@ int DelLL(LinkList L,int e,stu *a){
         s=r;
         r=r->next;
         memmove(a, &r->data, sizeof(stu));
-        printf("%s %d %.1f\n", r->data.name, r->data.stunum, r->data.score);   
+         
     }
     s->next = r->next;
     free(r);
-    printf("删除成功\n");
+    //printf("删除成功\n");
     return(1);
 }
 
@@ -171,7 +171,7 @@ int InsertLL(LinkList L,int e,stu a){
             return(1);
         }
         if(r==NULL){
-            printf("插入位置不存在\n");
+            //printf("插入位置不存在\n");
             return(0);
         }
         else if(r->next==NULL && i==e-2){
