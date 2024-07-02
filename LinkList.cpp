@@ -188,7 +188,7 @@ int bianli(LinkList L){
     r=L->next;
     printf("\n");
     while(r!=NULL){
-        printf("%s %d:%f \n",r->data.name,r->data.stunum,r->data.score);
+        printf("姓名：%s 学号：%d 成绩：%f\n",r->data.name,r->data.stunum,r->data.score);
         r=r->next;
     }
     printf("\n");
@@ -204,6 +204,21 @@ int Findstunum(LinkList L,int x){
             return(i+1);
         }
         r=r->next;
+        i++;
+    }
+    printf("数据不存在\n");
+    return(0);
+}
+int Outstunum(LinkList L, int x,stu *a) {
+    LinkList r;
+    int i = 0;
+    r = L->next;
+    while (r != NULL) {
+        if (r->data.stunum == x) {
+            memmove(a, &r->data, sizeof(stu));
+            return(i + 1);
+        }
+        r = r->next;
         i++;
     }
     printf("数据不存在\n");

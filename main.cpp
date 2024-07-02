@@ -158,17 +158,13 @@ int main() {
             }
             case 4: {
                 int stunum;
+                stu seestu;
                 printf("请输入要查询的学生学号：\n");
                 scanf("%d", &stunum);
-                stu searchedStu;
-                if (Findstunum(head, stunum) != -1) {
-                    printf("学生信息如下：\n");
-                    printf("%s %d %f\n", searchedStu.name, searchedStu.stunum, searchedStu.score);
-                }
-                else {
-                    printf("未找到该学生\n");
-                }
+                Outstunum(head, stunum,&seestu);
+                printf("姓名：%s 学号：%d 成绩：%f\n", seestu.name, seestu.stunum, seestu.score);
                 break;
+                
             }
             case 5: {
                 printf("所有学生成绩如下：\n");
@@ -201,6 +197,10 @@ int main() {
 
     if (WriteListToFile(head, "students.txt")) {
         printf("链表数据已写入文件\n");
+    }
+    //释放内存
+    for (int i = 1; i <= linkLen(head); i++) {
+        DelLL(head, i, NULL);
     }
     
     return 0;
