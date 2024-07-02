@@ -1,7 +1,8 @@
 //
 // Created by l1460 on 24-7-2.
 //
-#include <stdio.h>
+#include "LinkList.cpp"
+
 
 // 读取文件内容并打印到标准输出
 void readFile(const char *filename) {
@@ -20,7 +21,23 @@ void readFile(const char *filename) {
     }
 }
 
+
+
 int main() {
-    readFile("sysconst.txt");
+    //readFile("sysconst.txt"); // 调用函数读取文件内容
+
+    LinkList head;
+    InitList(&head);
+    CreateFromTailWithoutInput(head);
+
+    bianli(head);
+    stu *see;
+    DelLL(head, 3,see);
+    printf("%c\n",see->name);
+    bianli(head);
+    see->score+=5;
+    InsertLL(head, 3, *see);
+    bianli(head);
+
     return 0;
 }

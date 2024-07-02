@@ -1,0 +1,202 @@
+//
+// Created by l1460 on 2024/3/27.
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+typedef struct student{
+    char name[20];
+    int stunum;
+    float score;
+}stu;
+typedef stu Elemtype;
+
+
+typedef struct node{
+    Elemtype data;
+    struct node *next;
+}Node,*LinkList;
+
+
+
+int InitList(LinkList *L){
+    *L=(LinkList)malloc(sizeof(Node));
+    if(L==NULL){
+        printf("内存申请失败\n");
+        return(0);
+    }
+    else{
+        (*L)->next=NULL;
+        return(1);
+    }
+}
+
+int CreateFromTailWithoutInput(LinkList L){
+    Node *r,*s;
+    int flag=1;
+    r=L;
+    Elemtype c;
+    stu teststu[50];
+    teststu[0].stunum=1;
+    teststu[0].score=99;
+    strcpy(teststu[0].name,"李华");
+
+    teststu[1].stunum=2;
+    teststu[1].score=66;
+    strcpy(teststu[1].name,"张三");
+
+    teststu[2].stunum=3;
+    teststu[2].score=88;
+    strcpy(teststu[2].name,"王五");
+
+    teststu[3].stunum=4;
+    teststu[3].score=77;
+    strcpy(teststu[3].name,"赵六");
+
+    teststu[4].stunum=5;
+    teststu[4].score=55;
+    strcpy(teststu[4].name,"钱七");
+
+    int k=0;
+    while(flag){
+        c=teststu[k++];
+        if(c.stunum!=0 || c.score!=-1 || c.name!=""){
+            s=(Node*)malloc(sizeof(Node));
+            s->data.stunum=c.stunum;
+            s->data.score=c.score;
+            strcpy(s->data.name,c.name);
+            r->next=s;
+            r=s;
+        }
+        else{
+            flag=0;
+            r->next=NULL;
+        }
+    }
+    return(0);
+}
+int CreateFromTail(LinkList L){
+    Node *r,*s;
+    int flag=1;
+    r=L;
+    Elemtype c;
+    while(flag){
+        printf("请输入名字：");
+        scanf("%d",&c.name);
+        printf("请输入学号：");
+        scanf("%d",&c.stunum);
+        printf("请输入成绩：");
+        scanf("%f",&c.score);
+        if(c.stunum!=0 || c.score!=-1 || c.name!=""){
+            s=(Node*)malloc(sizeof(Node));
+            s->data.stunum=c.stunum;
+            s->data.score=c.score;
+            strcpy(s->data.name,c.name);
+            r->next=s;
+            r=s;
+        }
+        else{
+            flag=0;
+            r->next=NULL;
+        }
+    }
+    return(0);
+}
+
+int DelLL(LinkList L,int e,stu *a){
+    if(e<1){
+        printf("输入非法\n");
+    }
+
+    int i;
+    LinkList r,s;
+    r=L->next;
+    for(i=0;i<e;i++){
+        if(e==1){
+            s=L->next;
+            L->next=L->next->next;
+            free(s);
+            return(1);
+        }
+        if(i==e-2){
+            s=r;
+        }
+        else if(i==e-1){
+            s->next=r->next;
+            memcpy(a, &r->data, sizeof(stu));
+            free(r);
+            return(1);
+        }
+        if(r->next==NULL){
+            printf("删除位置不存在\n");
+            return(0);
+        }
+        r=r->next;
+    }
+}
+
+int InsertLL(LinkList L,int e,stu a){
+    if(e<1){
+        printf("输入非法\n");
+    }
+
+    int i;
+    LinkList r=L->next,s,In;
+    In=(Node*)malloc(sizeof(Node));
+
+    memcpy(&In->data, &a, sizeof(stu));
+    for(i=0;i<e;i++){
+        if(e==1){
+            In->next=L->next;
+            L->next=In;
+            return(1);
+        }
+        if(i==e-2){
+            s=r;
+        }
+        else if(i==e-1){
+            s->next=In;
+            In->next=r;
+            return(1);
+        }
+        if(r==NULL){
+            printf("插入位置不存在\n");
+            return(0);
+        }
+        else if(r->next==NULL && i==e-2){
+            r->next=In;
+            In->next=NULL;
+            return(0);
+        }
+        r=r->next;
+    }
+}
+
+int bianli(LinkList L){
+    LinkList r;
+    r=L->next;
+    printf("\n");
+    while(r!=NULL){
+        printf("%c(%d):%f \n",r->data.name,r->data.stunum,r->data.score);
+        r=r->next;
+    }
+    printf("\n");
+    return(0);
+}
+
+int Findstunum(LinkList L,int x){
+    LinkList r;
+    int i=0;
+    r=L->next;
+    while(r!=NULL){
+        if(r->data.stunum==x){
+            return(i+1);
+        }
+        r=r->next;
+        i++;
+    }
+    printf("数据不存在\n");
+    return(0);
+}
