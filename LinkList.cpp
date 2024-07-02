@@ -63,7 +63,7 @@ int CreateFromTailWithoutInput(LinkList L){
 
     int k=0;
     while(flag){
-        memcpy(&c,&teststu[k],sizeof(Elemtype));
+        memmove(&c,&teststu[k],sizeof(Elemtype));
         if(c.stunum != 0 && c.score != -1 && strcmp(c.name, "") !=  0){
             s=(Node*)malloc(sizeof(Node));
             s->data.stunum=c.stunum;
@@ -108,8 +108,20 @@ int CreateFromTail(LinkList L){
     return(0);
 }
 
+int linkLen(LinkList L){
+    LinkList r;
+    int i=0;
+    r=L->next;
+    while(r!=NULL){
+        i++;
+        r=r->next;
+    }
+    return(i);
+}
+
+
 int DelLL(LinkList L,int e,stu *a){
-    if(e<1||e>){
+    if(e<1|| e>linkLen(L)){
         printf("输入非法\n");
     }
 
@@ -117,6 +129,7 @@ int DelLL(LinkList L,int e,stu *a){
     LinkList r,s;
     r=L->next;
     for(i=1;i<e+1;i++){
+        printf("%d ",i);
         if(e==1){
             s=L->next;
             L->next=L->next->next;
@@ -128,14 +141,19 @@ int DelLL(LinkList L,int e,stu *a){
         }
         else if(i==e){
             s->next=r->next;
-            memcpy(a, &r->data, sizeof(stu));
+            printf("%d. ",i);
+            printf("%s %d %.1f\n",r->data.name,r->data.stunum,r->data.score);
+            //memmove(a, &r->data, sizeof(stu));
+            a->stunum=r->data.stunum;
+            a->score=r->data.score;
+            strcpy(a->name,r->data.name);
+            printf("%d。 ",i);
             free(r);
+
+            printf("删除成功\n");
             return(1);
         }
-        if(r->next==NULL){
-            printf("删除位置不存在\n");
-            return(0);
-        }
+
         r=r->next;
     }
 }
@@ -149,7 +167,7 @@ int InsertLL(LinkList L,int e,stu a){
     LinkList r=L->next,s,In;
     In=(Node*)malloc(sizeof(Node));
 
-    memcpy(&In->data, &a, sizeof(stu));
+    memmove(&In->data, &a, sizeof(stu));
     for(i=0;i<e;i++){
         if(e==1){
             In->next=L->next;
@@ -202,14 +220,4 @@ int Findstunum(LinkList L,int x){
     }
     printf("数据不存在\n");
     return(0);
-}
-int linkLen(LinkList L){
-    LinkList r;
-    int i=0;
-    r=L->next;
-    while(r!=NULL){
-        i++;
-        r=r->next;
-    }
-    return(i);
 }

@@ -34,7 +34,9 @@ int main() {
     bianli(head);
     printf("%d\n", linkLen(head));
 
-    stu *see;
+    printf("%d\n", sizeof(stu));
+
+    stu *see = nullptr;
     DelLL(head, 3,see);
     printf("%s\n",see->name);
     bianli(head);
