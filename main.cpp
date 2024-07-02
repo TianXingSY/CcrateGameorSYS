@@ -80,7 +80,14 @@ int main() {
 
     LinkList head;
     InitList(&head);
-    ReadListFromFile(&head,"students.txt");// 调用函数读取文件内容
+    if (ReadListFromFile(&head, "students.txt")!=1) {// 调用函数读取文件内容
+        printf("读取文件失败,尝试创建新文件\n");
+        if (WriteListToFile(head, "students.txt") != 1){
+            printf("创建新文件失败\n");
+            return 0;
+        }
+        printf("创建新文件成功\n");
+    }
     //CreateFromTailWithoutInput(head);
     printf("%s %d %f",head->next->data.name,head->next->data.stunum,head->next->data.score);
     printf("\n");
