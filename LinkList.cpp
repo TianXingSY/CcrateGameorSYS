@@ -59,9 +59,11 @@ int CreateFromTailWithoutInput(LinkList L){
     teststu[4].score=55;
     strcpy(teststu[4].name,"Ç®Æß");
 
+    teststu[5].stunum=0;
+
     int k=0;
     while(flag){
-        c=teststu[k++];
+        memcpy(&c,&teststu[k++],sizeof(Elemtype));
         if(c.stunum!=0 || c.score!=-1 || c.name!=""){
             s=(Node*)malloc(sizeof(Node));
             s->data.stunum=c.stunum;
@@ -179,7 +181,7 @@ int bianli(LinkList L){
     r=L->next;
     printf("\n");
     while(r!=NULL){
-        printf("%c(%d):%f \n",r->data.name,r->data.stunum,r->data.score);
+        printf("%s %d:%f \n",r->data.name,r->data.stunum,r->data.score);
         r=r->next;
     }
     printf("\n");

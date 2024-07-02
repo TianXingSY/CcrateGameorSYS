@@ -29,6 +29,7 @@ int main() {
     LinkList head;
     InitList(&head);
     CreateFromTailWithoutInput(head);
+    printf("%s %d %f",head->next->data.name,head->next->data.stunum,head->next->data.score);
 
     bianli(head);
     stu *see;
