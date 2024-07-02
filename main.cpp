@@ -36,12 +36,12 @@ int main() {
 
     printf("%d\n", sizeof(stu));
 
-    stu *see=NULL;
-    DelLL(head, 3,see);
-    printf("%s\n",see->name);
+    stu see;
+    DelLL(head, 5,&see);
+    printf("%s\n",see.name);
     bianli(head);
-    see->score+=5;
-    InsertLL(head, 3, *see);
+    see.score+=5;
+    InsertLL(head, 3, see);
     bianli(head);
 
     return 0;

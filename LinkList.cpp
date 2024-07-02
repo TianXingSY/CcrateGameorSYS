@@ -137,13 +137,12 @@ int DelLL(LinkList L,int e,stu *a){
     for(i=1;i<e;i++){
         printf("%d ",i);
         
-        
         s=r;
         r=r->next;
-        /*a->stunum = r->data.stunum;
+        a->stunum = r->data.stunum;
         a->score = r->data.score;
-        strcpy(a->name, r->data.name);*/
-     printf("%s %d %.1f\n", r->data.name, r->data.stunum, r->data.score);   
+        strcpy(a->name, r->data.name);
+        printf("%s %d %.1f\n", r->data.name, r->data.stunum, r->data.score);   
     }
     
     s->next = r->next;
