@@ -63,8 +63,8 @@ int CreateFromTailWithoutInput(LinkList L){
 
     int k=0;
     while(flag){
-        memcpy(&c,&teststu[k++],sizeof(Elemtype));
-        if(c.stunum!=0 || c.score!=-1 || c.name!=""){
+        memcpy(&c,&teststu[k],sizeof(Elemtype));
+        if(c.stunum != 0 && c.score != -1 && strcmp(c.name, "") !=  0){
             s=(Node*)malloc(sizeof(Node));
             s->data.stunum=c.stunum;
             s->data.score=c.score;
@@ -76,6 +76,7 @@ int CreateFromTailWithoutInput(LinkList L){
             flag=0;
             r->next=NULL;
         }
+        k++;
     }
     return(0);
 }
@@ -86,12 +87,12 @@ int CreateFromTail(LinkList L){
     Elemtype c;
     while(flag){
         printf("请输入名字：");
-        scanf("%d",&c.name);
+        scanf("%s",&c.name);
         printf("请输入学号：");
         scanf("%d",&c.stunum);
         printf("请输入成绩：");
         scanf("%f",&c.score);
-        if(c.stunum!=0 || c.score!=-1 || c.name!=""){
+        if(c.stunum!=0 && c.score!=-1 && strcmp(c.name, "") != 0){
             s=(Node*)malloc(sizeof(Node));
             s->data.stunum=c.stunum;
             s->data.score=c.score;

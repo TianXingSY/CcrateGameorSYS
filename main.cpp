@@ -30,11 +30,12 @@ int main() {
     InitList(&head);
     CreateFromTailWithoutInput(head);
     printf("%s %d %f",head->next->data.name,head->next->data.stunum,head->next->data.score);
-
+    printf("\n");
     bianli(head);
+
     stu *see;
     DelLL(head, 3,see);
-    printf("%c\n",see->name);
+    printf("%s\n",see->name);
     bianli(head);
     see->score+=5;
     InsertLL(head, 3, *see);
