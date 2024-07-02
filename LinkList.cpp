@@ -224,3 +224,60 @@ int Outstunum(LinkList L, int x,stu *a) {
     printf("数据不存在\n");
     return(0);
 }
+//依据成绩快速排序
+int QuickSort(LinkList L,int re=0){
+    LinkList f=L->next, b=L->next;
+    int i, j, k, len;
+    len=linkLen(L);
+    stu* linshi;
+    linshi = (stu*)malloc(sizeof(stu)*len);
+    for (i = 0; i < len; i++) {
+        memmove(&linshi[i], &b->data, sizeof(stu));
+        b = b->next;
+    }
+    int front=0, back=len-1;
+    //利用线性表随机读取优势减少步骤
+    sonofQuick(linshi, front, back);
+    for (i = 0; i < len; i++) {
+        memmove(&f->data, &linshi[i], sizeof(stu));
+        f = f->next;
+    }
+    
+
+    return 0;
+}
+stu* sonofQuick(stu* linshi, int front, int back) {
+    int fl = 0,t,Ffront=front,Fback=back;
+    stu temp;
+    while (front < back) {
+        if (fl == 0) {
+            if (linshi[front].score > linshi[back].score) {
+                memmove(&temp, &linshi[front], sizeof(stu));
+                memmove(&linshi[front], &linshi[back], sizeof(stu));
+                memmove(&linshi[back], &temp, sizeof(stu));
+                fl = 1;
+            }
+            else {
+                back--;
+            }
+        }
+        else {
+            if (linshi[front].score < linshi[back].score) {
+                memmove(&temp, &linshi[front], sizeof(stu));
+                memmove(&linshi[front], &linshi[back], sizeof(stu));
+                memmove(&linshi[back], &temp, sizeof(stu));
+                fl = 0;
+            }
+            else {
+                front++;
+            }
+        }
+
+    }
+    if (Ffront - Fback > 1) {
+        sonofQuickSort(linshi, Ffront, front);
+        sonofQuickSort(linshi, back, Fback - 1);
+    }
+    
+    return linshi;
+}
