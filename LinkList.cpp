@@ -124,38 +124,38 @@ int DelLL(LinkList L,int e,stu *a){
     if(e<1|| e>linkLen(L)){
         printf("输入非法\n");
     }
-
-    int i;
-    LinkList r,s;
-    r=L->next;
-    for(i=1;i<e+1;i++){
-        printf("%d ",i);
-        if(e==1){
-            s=L->next;
-            L->next=L->next->next;
-            free(s);
-            return(1);
-        }
-        if(i==e-1){
-            s=r;
-        }
-        else if(i==e){
-            s->next=r->next;
-            printf("%d. ",i);
-            printf("%s %d %.1f\n",r->data.name,r->data.stunum,r->data.score);
-            //memmove(a, &r->data, sizeof(stu));
-            a->stunum=r->data.stunum;
-            a->score=r->data.score;
-            strcpy(a->name,r->data.name);
-            printf("%d。 ",i);
-            free(r);
-
-            printf("删除成功\n");
-            return(1);
-        }
-
-        r=r->next;
+    LinkList r, s;
+    if (e == 1) {
+        s = L->next;
+        L->next = L->next->next;
+        free(s);
+        return(1);
     }
+    int i;
+    s = L;
+    r=L->next;
+    for(i=1;i<e;i++){
+        printf("%d ",i);
+        
+        
+        s=r;
+        r=r->next;
+        /*a->stunum = r->data.stunum;
+        a->score = r->data.score;
+        strcpy(a->name, r->data.name);*/
+     printf("%s %d %.1f\n", r->data.name, r->data.stunum, r->data.score);   
+    }
+    
+    s->next = r->next;
+    printf("%d. ", i);
+    
+    //memmove(a, &r->data, sizeof(stu));
+
+    printf("%d。 ", i);
+    free(r);
+
+    printf("删除成功\n");
+    return(1);
 }
 
 int InsertLL(LinkList L,int e,stu a){

@@ -36,7 +36,7 @@ int main() {
 
     printf("%d\n", sizeof(stu));
 
-    stu *see = nullptr;
+    stu *see=NULL;
     DelLL(head, 3,see);
     printf("%s\n",see->name);
     bianli(head);
