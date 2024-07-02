@@ -62,18 +62,6 @@ int WriteListToFile(LinkList L, const char* filename) {
     fclose(fp);
     return 1;
 }
-/*void writeFile(const char *filename, const char *content) {
-    FILE *file;
-    file = fopen(filename, "w"); // 打开文件用于写入
-
-    if (file != NULL) {
-        fprintf(file, "%s", content); // 将内容写入文件
-        fclose(file); // 关闭文件
-    } else {
-        perror("Error opening file"); // 输出错误信息
-    }
-}*/
-
 
 
 int main() {
@@ -90,9 +78,9 @@ int main() {
     }
     int flag = 1;
     printf("欢迎使用学生成绩管理系统-ver beta 0.1\n");
-    while (flag) {
+    while (1) {
         int choice;
-        printf("请选择操作：\n");
+        printf("\n请选择操作：\n");
         printf("1. 添加学生\n");
         printf("2. 删除学生\n");
         printf("3. 修改学生信息（成绩）\n");
@@ -161,8 +149,10 @@ int main() {
                 stu seestu;
                 printf("请输入要查询的学生学号：\n");
                 scanf("%d", &stunum);
-                Outstunum(head, stunum,&seestu);
-                printf("姓名：%s 学号：%d 成绩：%f\n", seestu.name, seestu.stunum, seestu.score);
+                if (Outstunum(head, stunum, &seestu)) {
+                    printf("姓名：%s 学号：%d 成绩：%f\n", seestu.name, seestu.stunum, seestu.score);
+                }
+                
                 break;
                 
             }
@@ -177,31 +167,24 @@ int main() {
                 break;
             }
         }
+        if (flag == 0) {
+            break;
+        }
 
     }
-    /*CreateFromTailWithoutInput(head);
-    printf("%s %d %f",head->next->data.name,head->next->data.stunum,head->next->data.score);
-    printf("\n");
-    bianli(head);
-    printf("%d\n", linkLen(head));
 
-    printf("%d\n", sizeof(stu));
-
-    stu see;
-    DelLL(head, 5,&see);
-    printf("%s\n",see.name);
-    bianli(head);
-    see.score+=5;
-    InsertLL(head, 3, see);
-    bianli(head);*/
 
     if (WriteListToFile(head, "students.txt")) {
         printf("链表数据已写入文件\n");
     }
     //释放内存
-    for (int i = 1; i <= linkLen(head); i++) {
-        DelLL(head, i, NULL);
+    int len = linkLen(head);
+    stu temp;
+    for (int i = 1; i <= len; i++) {
+        DelLL(head, 1, &temp);
     }
+    free(head);
+    printf("内存已释放\n");
     
     return 0;
 }
