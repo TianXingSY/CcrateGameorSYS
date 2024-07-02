@@ -116,17 +116,17 @@ int DelLL(LinkList L,int e,stu *a){
     int i;
     LinkList r,s;
     r=L->next;
-    for(i=0;i<e;i++){
+    for(i=1;i<e+1;i++){
         if(e==1){
             s=L->next;
             L->next=L->next->next;
             free(s);
             return(1);
         }
-        if(i==e-2){
+        if(i==e-1){
             s=r;
         }
-        else if(i==e-1){
+        else if(i==e){
             s->next=r->next;
             memcpy(a, &r->data, sizeof(stu));
             free(r);
