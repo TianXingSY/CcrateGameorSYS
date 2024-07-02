@@ -86,7 +86,8 @@ int main() {
         printf("3. 修改学生信息（成绩）\n");
         printf("4. 查询学生成绩\n");
         printf("5. 显示所有学生成绩\n");
-        printf("6. 退出\n");
+        printf("6. 排序所有学生信息\n");
+        printf("7. 退出\n");
         scanf("%d", &choice);
 
         switch (choice) {
@@ -162,6 +163,13 @@ int main() {
                 break;
             }
             case 6: {
+                if (Sort(head)) {
+                    printf("成功");
+                    bianli(head);
+                }
+                break;
+            }
+            case 7: {
                 printf("感谢使用学生成绩管理系统-ver beta 0.1\n");
                 flag = 0;
                 break;

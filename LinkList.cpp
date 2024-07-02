@@ -224,60 +224,35 @@ int Outstunum(LinkList L, int x,stu *a) {
     printf("数据不存在\n");
     return(0);
 }
-//依据成绩快速排序
-int QuickSort(LinkList L,int re=0){
+//依据成绩排序
+
+
+int Sort(LinkList L,int re=0){
     LinkList f=L->next, b=L->next;
-    int i, j, k, len;
+    int i, j, len,max=0;
     len=linkLen(L);
-    stu* linshi;
+    stu* linshi,temp;
     linshi = (stu*)malloc(sizeof(stu)*len);
     for (i = 0; i < len; i++) {
         memmove(&linshi[i], &b->data, sizeof(stu));
         b = b->next;
     }
-    int front=0, back=len-1;
-    //利用线性表随机读取优势减少步骤
-    sonofQuick(linshi, front, back);
+    for (i = 0; i < len - 1; i++) {
+        max = 0;
+        for (j = 0; j < len - i; j++) {
+            if (linshi[j].score > linshi[max].score) {
+                max = j;
+            }
+        }
+        memmove(&temp, &linshi[max], sizeof(stu));
+        memmove(&linshi[max], &linshi[len - i - 1], sizeof(stu));
+        memmove(&linshi[len - i - 1], &temp, sizeof(stu));
+    }
     for (i = 0; i < len; i++) {
         memmove(&f->data, &linshi[i], sizeof(stu));
         f = f->next;
     }
     
 
-    return 0;
-}
-stu* sonofQuick(stu* linshi, int front, int back) {
-    int fl = 0,t,Ffront=front,Fback=back;
-    stu temp;
-    while (front < back) {
-        if (fl == 0) {
-            if (linshi[front].score > linshi[back].score) {
-                memmove(&temp, &linshi[front], sizeof(stu));
-                memmove(&linshi[front], &linshi[back], sizeof(stu));
-                memmove(&linshi[back], &temp, sizeof(stu));
-                fl = 1;
-            }
-            else {
-                back--;
-            }
-        }
-        else {
-            if (linshi[front].score < linshi[back].score) {
-                memmove(&temp, &linshi[front], sizeof(stu));
-                memmove(&linshi[front], &linshi[back], sizeof(stu));
-                memmove(&linshi[back], &temp, sizeof(stu));
-                fl = 0;
-            }
-            else {
-                front++;
-            }
-        }
-
-    }
-    if (Ffront - Fback > 1) {
-        sonofQuickSort(linshi, Ffront, front);
-        sonofQuickSort(linshi, back, Fback - 1);
-    }
-    
-    return linshi;
+    return 1;
 }
