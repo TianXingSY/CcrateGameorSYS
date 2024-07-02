@@ -135,22 +135,13 @@ int DelLL(LinkList L,int e,stu *a){
     s = L;
     r=L->next;
     for(i=1;i<e;i++){
-        printf("%d ",i);
-        
         s=r;
         r=r->next;
         memmove(a, &r->data, sizeof(stu));
         printf("%s %d %.1f\n", r->data.name, r->data.stunum, r->data.score);   
     }
-    
     s->next = r->next;
-    printf("%d. ", i);
-    
-    
-
-    printf("%d¡£ ", i);
     free(r);
-
     printf("É¾³ý³É¹¦\n");
     return(1);
 }
