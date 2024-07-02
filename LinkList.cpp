@@ -109,7 +109,7 @@ int CreateFromTail(LinkList L){
 }
 
 int DelLL(LinkList L,int e,stu *a){
-    if(e<1){
+    if(e<1||e>){
         printf("输入非法\n");
     }
 
@@ -202,4 +202,14 @@ int Findstunum(LinkList L,int x){
     }
     printf("数据不存在\n");
     return(0);
+}
+int linkLen(LinkList L){
+    LinkList r;
+    int i=0;
+    r=L->next;
+    while(r!=NULL){
+        i++;
+        r=r->next;
+    }
+    return(i);
 }

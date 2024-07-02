@@ -32,6 +32,7 @@ int main() {
     printf("%s %d %f",head->next->data.name,head->next->data.stunum,head->next->data.score);
     printf("\n");
     bianli(head);
+    printf("%d\n", linkLen(head));
 
     stu *see;
     DelLL(head, 3,see);
