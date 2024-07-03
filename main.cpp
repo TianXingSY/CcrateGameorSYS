@@ -77,7 +77,7 @@ int main() {
         printf("创建新文件成功\n");
     }
     int flag = 1;
-    printf("欢迎使用学生成绩管理系统-ver beta 0.1\n");
+    printf("欢迎使用学生成绩管理系统-ver 1.01\n");
     while (1) {
         int choice;
         printf("\n请选择操作：\n");
