@@ -146,13 +146,26 @@ int main() {
                 break;
             }
             case 4: {
-                int stunum;
+                int stunum,choice;
                 stu seestu;
-                printf("请输入要查询的学生学号：\n");
-                scanf("%d", &stunum);
-                if (Outstunum(head, stunum, &seestu)) {
-                    printf("姓名：%s 学号：%d 成绩：%f\n", seestu.name, seestu.stunum, seestu.score);
+                char* name;
+                printf("1: 姓名查询\n2: 学号查询\n");
+                scanf("%d", &choice);
+                if(choice == 1){
+                    printf("请输入要查询的学生姓名：\n");
+                    scanf("%s", name);
+                    if (Outname(head, name, &seestu)) {
+                        printf("姓名：%s 学号：%d 成绩：%f\n", seestu.name, seestu.stunum, seestu.score);
+                    }
                 }
+                else{
+                    printf("请输入要查询的学生学号：\n");
+                    scanf("%d", &stunum);
+                    if (Outstunum(head, stunum, &seestu)) {
+                        printf("姓名：%s 学号：%d 成绩：%f\n", seestu.name, seestu.stunum, seestu.score);
+                    }
+                }
+
                 
                 break;
                 

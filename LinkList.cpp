@@ -224,9 +224,25 @@ int Outstunum(LinkList L, int x,stu *a) {
     printf("数据不存在\n");
     return(0);
 }
+int Outname(LinkList L, char *x,stu *a) {
+    LinkList r;
+    int i = 0;
+    r = L->next;
+    while (r != NULL) {
+        if (strcmp(r->data.name, x) == 0) {
+            memmove(a, &r->data, sizeof(stu));
+            return(i + 1);
+        }
+        r = r->next;
+        i++;
+    }
+    printf("数据不存在\n");
+    return(0);
+}
+
+
+
 //依据成绩排序
-
-
 int Sort(LinkList L,int re=0){
     LinkList f=L->next, b=L->next;
     int i, j, len,max=0;
