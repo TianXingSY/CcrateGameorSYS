@@ -163,7 +163,13 @@ int main() {
                 break;
             }
             case 6: {
-                if (Sort(head)) {
+                printf("0£ºÉýÐò\n1£º½µÐò\n");
+                int choice;
+                scanf("%d", &choice);
+                if(choice != 1){
+                    choice=0;
+                }
+                if (Sort(head, choice)) {
                     printf("³É¹¦");
                     bianli(head);
                 }

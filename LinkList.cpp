@@ -248,11 +248,18 @@ int Sort(LinkList L,int re=0){
         memmove(&linshi[max], &linshi[len - i - 1], sizeof(stu));
         memmove(&linshi[len - i - 1], &temp, sizeof(stu));
     }
-    for (i = 0; i < len; i++) {
-        memmove(&f->data, &linshi[i], sizeof(stu));
-        f = f->next;
-    }
-    
 
+    if(re==1){
+        for (i = len-1; i > -1; i--) {
+            memmove(&f->data, &linshi[i], sizeof(stu));
+            f = f->next;
+        }
+    }
+    else{
+        for (i = 0; i < len; i++) {
+            memmove(&f->data, &linshi[i], sizeof(stu));
+            f = f->next;
+        }
+    }
     return 1;
 }
