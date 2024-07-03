@@ -277,5 +277,7 @@ int Sort(LinkList L,int re=0){
             f = f->next;
         }
     }
+    
+    free(linshi);
     return 1;
 }

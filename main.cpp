@@ -148,7 +148,7 @@ int main() {
             case 4: {
                 int stunum,choice;
                 stu seestu;
-                char* name;
+                char name[30];
                 printf("1: 姓名查询\n2: 学号查询\n");
                 scanf("%d", &choice);
                 if(choice == 1){
