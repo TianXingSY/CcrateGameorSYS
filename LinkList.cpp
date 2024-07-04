@@ -251,6 +251,10 @@ int Sort(LinkList L,int re=0){
     len=linkLen(L);
     stu* linshi,temp;
     linshi = (stu*)malloc(sizeof(stu)*len);
+    if (linshi == NULL) {
+        printf("ÄÚ´æÉêÇëÊ§°Ü\n");
+        return(0);
+    }
     for (i = 0; i < len; i++) {
         memmove(&linshi[i], &b->data, sizeof(stu));
         b = b->next;
