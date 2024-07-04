@@ -123,6 +123,7 @@ int linkLen(LinkList L){
 int DelLL(LinkList L,int e,stu *a){
     if(e<1|| e>linkLen(L)){
         printf("输入非法\n");
+        return(0);
     }
     LinkList r, s;
     if (e == 1) {
@@ -149,6 +150,7 @@ int DelLL(LinkList L,int e,stu *a){
 int InsertLL(LinkList L,int e,stu a){
     if(e<1){
         printf("输入非法\n");
+        return(0);
     }
 
     int i;
