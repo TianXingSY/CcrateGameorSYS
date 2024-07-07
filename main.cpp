@@ -1,9 +1,7 @@
 //
 // Created by l1460 on 24-7-2.
 //
-//
-// Created by l1460 on 2024/3/27.
-//
+
 
 #include <stdio.h>
 #include <stdlib.h>
